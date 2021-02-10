@@ -1,32 +1,45 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const gitLookup = require('../helpers/github')
+const database = require('../database')
+
+async function mapRepos (repoArray, cb) {
+  console.log('starting promise loop')
+  const promises = repoArray.map( async repo => {
+    const repoSave = await database.save(repo)
+    return repoSave
+  })
+  repoSaves = await Promise.all(promises)
+  console.log('ending the promise loop')
+  database.getRepoArray(repoArray[0]['owner'].id, (repoArray)=>{
+    cb(repoArray)
+  })
+
+}
+
+
 
 let app = express();
 var jsonParser = bodyParser.json()
 app.use(bodyParser.urlencoded({ extended: false }));
-
-
 app.use(express.static(__dirname + '/../client/dist'));
 
 
 
 app.post('/repos', jsonParser, function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
   console.log('got a post request')
-  console.log(req)
-  console.log(req.body)
+  // console.log(req)
+  // console.log(req.body)
 
-  gitLookup.getReposByUsername(req.body.GitHandle, (err, resp) => {
-    console.log(resp)
-    res.send("got it")
+  gitLookup.getReposByUsername(req.body.GitHandle, (err, repoArray) => {
+
+    mapRepos(repoArray.data, (repoArray)=>{
+      console.log('******************')
+      console.log('this is an array of all the repos')
+      console.log(repoArray)
+      res.send("got it")
+    })
   })
-
-
-
 });
 
 app.get('/repos', function (req, res) {
