@@ -10,11 +10,11 @@ async function mapRepos (repoArray, cb) {
     return repoSave
   })
   repoSaves = await Promise.all(promises)
+
   console.log('ending the promise loop')
   database.getRepoArray(repoArray[0]['owner'].id, (repoArray)=>{
     cb(repoArray)
   })
-
 }
 
 
@@ -37,7 +37,7 @@ app.post('/repos', jsonParser, function (req, res) {
       console.log('******************')
       console.log('this is an array of all the repos')
       console.log(repoArray)
-      res.send("got it")
+      res.send(repoArray)
     })
   })
 });
