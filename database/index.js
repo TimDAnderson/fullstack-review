@@ -38,6 +38,16 @@ let save = (repo, cb) => {
     }
     // console.log(newRepo)
     cb(newRepo)
+    Repo.find({gitHandle: "TimDAnderson2"})
+      .then((repos) => {
+        console.log('LOGGING ONE')
+        console.log(repos)
+        let found = repos[0]['_doc']
+        console.log(found)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
   })
 }
 
