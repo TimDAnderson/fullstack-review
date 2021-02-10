@@ -15,19 +15,17 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
+
 let getRepoArray = (owner, cb) => {
   Repo.find({ownerID: owner})
   .then((repoArray)=>{
     cb(repoArray)
   })
-
 }
+
 
 let save = (repo, cb) => {
   console.log(repo)
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
 
   let newRepo = new Repo({
     gitHandle: repo['owner']['login'],
@@ -41,37 +39,25 @@ let save = (repo, cb) => {
   console.log('****logging newRepo********')
   console.log(newRepo)
 
-  // newRepo.save()
-  //   .then(()=>{
-  //     cb('saved')
-  //   })
-
 
   Repo.find({repoID: repo.id})
-      .then((repos) => {
-        console.log('LOGGING ONE')
-        console.log(repos.length)
+    .then((repos) => {
+      console.log('LOGGING ONE')
+      console.log(repos.length)
 
-        if (repos.length === 0) {
-          newRepo.save((err, newRepo)=>{
-            if (err) {
-              console.log('error')
-              console.log(err)
-              return console.err(err)
-            }
-            //do a find all for this github handle
-            // Repo.find({ownerID: repo['owner'].id})
-            //   .then((repoArray)=>{
-            //     cb(repoArray)
-            //   })
-
-          })
-
-        }
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+      if (repos.length === 0) {
+        newRepo.save((err, newRepo)=>{
+          if (err) {
+            console.log('error')
+            console.log(err)
+            return console.err(err)
+          }
+        })
+      }
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
 
 }
 
