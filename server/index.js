@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const gitLookup = require('../helpers/github')
 
 let app = express();
 var jsonParser = bodyParser.json()
@@ -20,8 +21,13 @@ app.post('/repos', jsonParser, function (req, res) {
   console.log(req.body)
   console.log(req.json)
 
+  gitLookup.getReposByUsername(req.body.GitHandle, (err, resp) => {
+    console.log(resp)
+    res.send("got it")
+  })
 
-  res.send("got it")
+
+
 });
 
 app.get('/repos', function (req, res) {
