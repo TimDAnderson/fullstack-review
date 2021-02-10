@@ -19,7 +19,6 @@ app.post('/repos', jsonParser, function (req, res) {
   console.log('got a post request')
   console.log(req)
   console.log(req.body)
-  console.log(req.json)
 
   gitLookup.getReposByUsername(req.body.GitHandle, (err, resp) => {
     console.log(resp)
