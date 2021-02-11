@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const gitLookup = require('../helpers/github')
+const top25 = require('../helpers/top25')
 const database = require('../database')
 
 async function mapRepos (repoArray, cb) {
@@ -46,6 +47,12 @@ app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
   console.log('got a get request')
+  database.getAll((repoArray)=>{
+    // console.log(repoArray)
+    top25.lookup(repoArray, (top25Arr)=>{
+      res.send(top25Arr)
+    })
+  })
 });
 
 let port = 1128;

@@ -15,6 +15,13 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
+let getAll = (cb) => {
+  Repo.find()
+  .then((repoArray)=>{
+    cb(repoArray)
+  })
+}
+
 
 let getRepoArray = (owner, cb) => {
   Repo.find({ownerID: owner})
@@ -70,5 +77,5 @@ let save = (repo, cb) => {
 
 
 module.exports.save = save;
-
+module.exports.getAll = getAll;
 module.exports.getRepoArray = getRepoArray;
