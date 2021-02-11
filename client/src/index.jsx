@@ -24,17 +24,21 @@ class App extends React.Component {
       data: {"GitHandle": term},
       datatype: "json"
     })
-      .done((msg)=>{
+      .done((repoArr)=>{
         console.log('data saved')
-        console.log(msg)
+        console.log(repoArr)
+        this.setState({
+          repos: repoArr
+        })
+
       })
   }
 
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
+      <RepoList repos={this.state.repos}/>
     </div>)
   }
 }
