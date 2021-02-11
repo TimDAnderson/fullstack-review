@@ -45,6 +45,7 @@ app.post('/repos', jsonParser, function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  console.log('got a get request')
 });
 
 let port = 1128;

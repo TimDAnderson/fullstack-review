@@ -16,7 +16,6 @@ class App extends React.Component {
   search (term) {
     console.log(`${term} was searched`);
     // TODO
-    let ajaxResp = 'TimDAnderson'
 
     $.ajax({
       method: 'POST',
@@ -32,6 +31,24 @@ class App extends React.Component {
         })
 
       })
+  }
+
+  searchAll () {
+    $.ajax({
+      url: 'http://localhost:1128/repos'
+    })
+      .done((repoArr)=>{
+        console.log('data saved')
+        console.log(repoArr)
+        this.setState({
+          repos: repoArr
+        })
+      })
+
+  }
+
+  componentDidMount () {
+    this.searchAll()
   }
 
   render () {
