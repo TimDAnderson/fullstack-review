@@ -24,7 +24,7 @@ const RepoList = (props) => {
         {
           props.repos.map(repo => {
             return (
-              <Repo repo={repo}/>
+              <Repo key={repo.repoID} repo={repo}/>
               )
             })
           }
@@ -34,5 +34,9 @@ const RepoList = (props) => {
 
   )
 }
+
+RepoList.propTypes = {
+  repos: React.PropTypes.array.isRequired
+};
 
 export default RepoList;

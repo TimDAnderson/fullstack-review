@@ -32,7 +32,9 @@ let getRepoArray = (owner, cb) => {
 
 
 let save = (repo, cb) => {
-  console.log(repo)
+  // console.log(repo)
+  return new Promise ((resolve, reject)=>{
+
 
   let newRepo = new Repo({
     gitHandle: repo['owner']['login'],
@@ -43,8 +45,8 @@ let save = (repo, cb) => {
     htmlURL: repo.html_url,
     ownerID: repo['owner'].id
   })
-  console.log('****logging newRepo********')
-  console.log(newRepo)
+  console.log('****finding then saving new repo********')
+  // console.log(newRepo)
 
 
   Repo.find({repoID: repo.id})
@@ -53,19 +55,23 @@ let save = (repo, cb) => {
       console.log(repos.length)
 
       if (repos.length === 0) {
+        console.log('new repo detected')
         newRepo.save((err, newRepo)=>{
           if (err) {
             console.log('error')
             console.log(err)
             return console.err(err)
           }
+          resolve()
         })
       }
+      resolve()
     })
     .catch((err)=>{
       console.log(err)
+      reject(err)
     })
-
+  })
 }
 
 

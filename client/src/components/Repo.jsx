@@ -6,7 +6,9 @@ const Repo = (props) => {
   return (
     <tr>
       <td>{props.repo.repoID}</td>
-      <td>{props.repo.name}</td>
+      <td>
+        <a href={props.repo.htmlURL}>{props.repo.name}</a>
+      </td>
       <td>{props.repo.gitHandle}</td>
       <td>{props.repo.ownerID}</td>
       <td>
@@ -16,5 +18,9 @@ const Repo = (props) => {
     </tr>
   )
 }
+
+Repo.propTypes = {
+  repo: React.PropTypes.object.isRequired
+};
 
 export default Repo

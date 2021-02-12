@@ -4,25 +4,30 @@ const gitLookup = require('../helpers/github')
 const top25 = require('../helpers/top25')
 const database = require('../database')
 
-async function mapRepos (repoArray, cb) {
-  console.log('starting promise loop')
-  const promises = repoArray.map( async repo => {
-    const repoSave = await database.save(repo)
-    return repoSave
-  })
-  repoSaves = await Promise.all(promises)
+function mapRepos (repoArray, cb) {
+  let promises = [];
 
-  console.log('ending the promise loop')
-  database.getRepoArray(repoArray[0]['owner'].id, (repoArray)=>{
-    cb(repoArray)
+  repoArray.forEach((repo)=>{
+    promises.push(database.save(repo))
   })
+
+  Promise.all(promises)
+    .then(()=>{
+      console.log('all of the promises are done')
+      console.log('ending the promise loop')
+      database.getRepoArray(repoArray[0]['owner'].id, (repoArray)=>{
+        cb(repoArray)
+      })
+    })
 }
 
 
 
 let app = express();
+
 var jsonParser = bodyParser.json()
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static(__dirname + '/../client/dist'));
 
 
