@@ -13,7 +13,6 @@ class Search extends React.Component {
     this.setState({
       term: e.target.value
     });
-    // console.log(this.state)
   }
 
   search() {

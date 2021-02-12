@@ -1,8 +1,5 @@
 module.exports.lookup = (array, cb) => {
   console.log('IN THE SORTER')
-  console.log(array)
-  console.log('lets log one')
-  console.log(array[0]._doc.watchers_count)
 
   let tempArray = array
 
@@ -16,19 +13,5 @@ module.exports.lookup = (array, cb) => {
     }
   }
 
-  // if (array.length < 26) {
-  //   cb(array)
-  // }
-  //take in array of unknown size
-
-
-  //sort it
-
-
-
-
-  //pass sorted array to callback
-
-  //for now do nothing, just pass back
   cb(array.slice(0,25))
 }

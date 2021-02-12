@@ -4,13 +4,14 @@ const gitLookup = require('../helpers/github')
 const top25 = require('../helpers/top25')
 const database = require('../database')
 
+
+//the purpose of this function is to make sure all
+//repos get saved to db before returning to clinet
 function mapRepos (repoArray, cb) {
   let promises = [];
-
   repoArray.forEach((repo)=>{
     promises.push(database.save(repo))
   })
-
   Promise.all(promises)
     .then(()=>{
       console.log('all of the promises are done')
@@ -21,8 +22,6 @@ function mapRepos (repoArray, cb) {
     })
 }
 
-
-
 let app = express();
 
 var jsonParser = bodyParser.json()
@@ -30,19 +29,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-
-
 app.post('/repos', jsonParser, function (req, res) {
   console.log('got a post request')
-  // console.log(req)
-  // console.log(req.body)
-
   gitLookup.getReposByUsername(req.body.GitHandle, (err, repoArray) => {
-
     mapRepos(repoArray.data, (repoArray)=>{
-      console.log('******************')
-      console.log('this is an array of all the repos')
-      console.log(repoArray)
       res.send(repoArray)
     })
   })
@@ -53,7 +43,6 @@ app.get('/repos', function (req, res) {
   // This route should send back the top 25 repos
   console.log('got a get request')
   database.getAll((repoArray)=>{
-    // console.log(repoArray)
     top25.lookup(repoArray, (top25Arr)=>{
       res.send(top25Arr)
     })

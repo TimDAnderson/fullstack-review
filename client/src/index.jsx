@@ -10,7 +10,6 @@ class App extends React.Component {
     this.state = {
       repos: []
     }
-
   }
 
   search (term) {
@@ -24,12 +23,9 @@ class App extends React.Component {
       datatype: "json"
     })
       .done((repoArr)=>{
-        console.log('data saved')
-        console.log(repoArr)
         this.setState({
           repos: repoArr
         })
-
       })
   }
 
@@ -38,8 +34,6 @@ class App extends React.Component {
       url: 'http://localhost:1128/repos'
     })
       .done((repoArr)=>{
-        console.log('data saved')
-        console.log(repoArr)
         this.setState({
           repos: repoArr
         })
