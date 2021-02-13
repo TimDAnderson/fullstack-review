@@ -18,11 +18,12 @@ class App extends React.Component {
 
     $.ajax({
       method: 'POST',
-      url: 'http://localhost:1128/repos',
+      url: 'http://localhost:8000/repos',
       data: {"GitHandle": term},
       datatype: "json"
     })
       .done((repoArr)=>{
+        console.log(repoArr)
         this.setState({
           repos: repoArr
         })
@@ -30,10 +31,12 @@ class App extends React.Component {
   }
 
   searchAll () {
+    console.log('in search all')
     $.ajax({
-      url: 'http://localhost:1128/repos'
+      url: 'http://localhost:8000/repos'
     })
       .done((repoArr)=>{
+        console.log(repoArr)
         this.setState({
           repos: repoArr
         })

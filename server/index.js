@@ -39,6 +39,8 @@ app.post('/repos', jsonParser, function (req, res) {
 app.get('/repos', function (req, res) {
   console.log('got a get request')
   database.getAll((repoArray)=>{
+    console.log('******THIS IS HTE REPO ARRAY FROM INDEX EXPRESS')
+    console.log(repoArray)
     top25.lookup(repoArray, (top25Arr)=>{
       res.send(top25Arr)
     })

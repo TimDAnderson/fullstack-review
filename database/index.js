@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetchers');
+// mongoose.connect('mongodb://localhost/fetchers');
+mongoose.connect("mongodb+srv://Tim925:mongo1566@cluster0.ay9l3.mongodb.net/fetchers?retryWrites=true&w=majority", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!
@@ -18,7 +22,13 @@ let Repo = mongoose.model('Repo', repoSchema);
 let getAll = (cb) => {
   Repo.find()
   .then((repoArray)=>{
+    console.log('logging the repArray')
+    console.log(repoArray)
     cb(repoArray)
+  })
+  .catch((err)=>{
+    console.log('this is the catch err')
+    console.log(err)
   })
 }
 
@@ -26,7 +36,12 @@ let getAll = (cb) => {
 let getRepoArray = (owner, cb) => {
   Repo.find({ownerID: owner})
   .then((repoArray)=>{
+    console.log('in the find all')
     cb(repoArray)
+  })
+  .catch((err)=>{
+    console.log('this is the catch err')
+    console.log(err)
   })
 }
 
@@ -47,6 +62,8 @@ let save = (repo, cb) => {
   })
   console.log('****finding then saving new repo********')
   // console.log(newRepo)
+  // console.log(newRepo.repoID)
+  console.log(repo.id)
 
 
   Repo.find({repoID: repo.id})
@@ -68,18 +85,22 @@ let save = (repo, cb) => {
       resolve()
     })
     .catch((err)=>{
+      console.log('error from find')
       console.log(err)
       reject(err)
     })
   })
 }
 
-
-//quick test
-// save({ repoID: 123 }, (result) => {
-//   console.log(result)
+// save({
+//   gitHandle: 'hi',
+//   repoID: 2,
+//   name: 'string',
+//   watchers_count: 4,
+//   forks_count: 5,
+//   htmlURL: 'hi',
+//   ownerID: 5
 // })
-
 
 
 module.exports.save = save;
