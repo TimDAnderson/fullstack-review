@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const gitLookup = require('../helpers/github')
 const top25 = require('../helpers/top25')
 const database = require('../database')
+const cors = require('cors');
 
 
 //the purpose of this function is to make sure all
@@ -23,6 +24,7 @@ function mapRepos (repoArray, cb) {
 let app = express();
 
 var jsonParser = bodyParser.json()
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + '/../client/dist'));
