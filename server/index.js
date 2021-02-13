@@ -14,8 +14,6 @@ function mapRepos (repoArray, cb) {
   })
   Promise.all(promises)
     .then(()=>{
-      console.log('all of the promises are done')
-      console.log('ending the promise loop')
       database.getRepoArray(repoArray[0]['owner'].id, (repoArray)=>{
         cb(repoArray)
       })
@@ -39,8 +37,6 @@ app.post('/repos', jsonParser, function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
   console.log('got a get request')
   database.getAll((repoArray)=>{
     top25.lookup(repoArray, (top25Arr)=>{
@@ -49,7 +45,10 @@ app.get('/repos', function (req, res) {
   })
 });
 
-let port = 1128;
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
