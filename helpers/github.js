@@ -1,4 +1,5 @@
 const axios = require('axios');
+const gitToken = process.env.TOKEN
 // const config = require('../config.js');
 
 let getReposByUsername = (name, cb) => {
@@ -7,7 +8,7 @@ let getReposByUsername = (name, cb) => {
     url: `https://api.github.com/users/${name}/repos`,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token 775f4d3e62c77133aabb88d62d1b4348ca048a73`
+      'Authorization': `token ${gitToken}`
     }
   };
 
