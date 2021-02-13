@@ -15,7 +15,6 @@ let getReposByUsername = (name, cb) => {
   axios(options)
     .then((response)=>{
       console.log('this is the response from the github server')
-      console.log(response.data.length)
       cb(null, response)
     })
 }
