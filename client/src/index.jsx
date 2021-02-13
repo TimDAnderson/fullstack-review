@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    this.searchAll()
+    // this.searchAll()
   }
 
   render () {
