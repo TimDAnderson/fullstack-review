@@ -1,5 +1,5 @@
 const axios = require('axios');
-const config = require('../config.js');
+// const config = require('../config.js');
 
 let getReposByUsername = (name, cb) => {
 
@@ -7,7 +7,7 @@ let getReposByUsername = (name, cb) => {
     url: `https://api.github.com/users/${name}/repos`,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      'Authorization': `token 775f4d3e62c77133aabb88d62d1b4348ca048a73`
     }
   };
 
