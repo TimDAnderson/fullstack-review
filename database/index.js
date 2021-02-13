@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dbPW = process.env.mongoPW
 // mongoose.connect('mongodb://localhost/fetchers');
-mongoose.connect(`mongodb+srv://Tim925:${mongo1566}@cluster0.ay9l3.mongodb.net/fetchers?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://Tim925:${dbPW}@cluster0.ay9l3.mongodb.net/fetchers?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
