@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Repo = (props) => {
-  console.log('made it to the Repo component')
-  console.log(props.repo)
   return (
     <tr>
       <td>{props.repo.repoID}</td>

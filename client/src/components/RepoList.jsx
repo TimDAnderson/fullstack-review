@@ -3,8 +3,6 @@ import Repo from './Repo.jsx'
 // import Table from 'react-bootstrap/Table'
 
 const RepoList = (props) => {
-  console.log('this is the RepoList component')
-  console.log(props.repos)
   return (
     <div>
       <h4> Repo List Component </h4>

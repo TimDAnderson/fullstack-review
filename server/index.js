@@ -23,8 +23,9 @@ function mapRepos (repoArray, cb) {
 
 let app = express();
 
-var jsonParser = bodyParser.json()
 app.use(cors());
+
+var jsonParser = bodyParser.json()
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -41,8 +42,6 @@ app.post('/repos', jsonParser, function (req, res) {
 app.get('/repos', function (req, res) {
   console.log('got a get request')
   database.getAll((repoArray)=>{
-    console.log('******THIS IS HTE REPO ARRAY FROM INDEX EXPRESS')
-    console.log(repoArray)
     top25.lookup(repoArray, (top25Arr)=>{
       res.send(top25Arr)
     })
