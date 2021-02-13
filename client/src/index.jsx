@@ -18,7 +18,7 @@ class App extends React.Component {
 
     $.ajax({
       method: 'POST',
-      url: 'http://localhost:8000/repos',
+      url: 'https://calm-citadel-77933.herokuapp.com/repos',
       data: {"GitHandle": term},
       datatype: "json"
     })
@@ -33,7 +33,7 @@ class App extends React.Component {
   searchAll () {
     console.log('in search all')
     $.ajax({
-      url: 'http://localhost:8000/repos'
+      url: 'https://calm-citadel-77933.herokuapp.com/repos'
     })
       .done((repoArr)=>{
         console.log(repoArr)
@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    // this.searchAll()
+    this.searchAll()
   }
 
   render () {
